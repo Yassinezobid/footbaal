@@ -1,0 +1,9 @@
+streamlit
+matplotlib
+requests
+pyttsx3
+python-Levenshtein
+sounddevice
+soundfile
+speechrecognition
+pandas
