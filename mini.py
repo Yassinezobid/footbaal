@@ -419,6 +419,12 @@ inv_data.append({
     "Investissement": f"Par associé ({st.session_state.nb_associes})",
     "Montant (DH)": f"{(indicateurs['total_investissement'] / st.session_state.nb_associes):.2f} DH"
 })
+inv_data.append({
+    "Catégorie": "",
+    "Investissement": f"Par associé ({st.session_state.nb_associes})",
+    "Montant (DH)": f"{(indicateurs['total_investissement'] / st.session_state.nb_associes):.2f} DH"
+})
+
 df_inv = pd.DataFrame(inv_data)
 st.dataframe(df_inv, use_container_width=True)
 
