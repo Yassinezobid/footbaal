@@ -96,8 +96,9 @@ def calculer_indicateurs():
     benefice_brut = revenu_brut - cout_total
     impot = benefice_brut * (st.session_state.taux_impot / 100) if benefice_brut > 0 else 0
     profit_net = benefice_brut - impot
-    profit_net_avec_amélioration = profit_net * 0.7
-    profit_par_associe = profit_net_avec_amélioration / st.session_state.nb_associes if st.session_state.nb_associes > 0 else 0
+    charge_amelioration = profit_net * 0.3
+    profit_net_final = profit_net - charge_amelioration
+    profit_par_associe = profit_net_final / st.session_state.nb_associes if st.session_state.nb_associes > 0 else 0
     
     # Calcul des investissements
     investissement_specifique_terrain = (
@@ -139,6 +140,8 @@ def calculer_indicateurs():
         'benefice_brut': benefice_brut,
         'impot': impot,
         'profit_net': profit_net,
+        'charge_amelioration': charge_amelioration,
+        'profit_net_apres_amelioration': profit_net_final,
         'profit_par_associe': profit_par_associe,
         'total_investissement': total_investissement,
         'roi_mensuel': roi_mensuel,
