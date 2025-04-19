@@ -323,9 +323,17 @@ st.markdown('<p class="sub-header">📊 Bilan financier mensuel</p>', unsafe_all
 
 # Tableau résumé des indicateurs financiers
 data_resume = {
-    "Indicateur": ["Revenu brut mensuel", "Coût variable (location)", "Coût fixe (charges)",
-                   "Coût total mensuel", "Bénéfice avant impôt", f"Impôt ({st.session_state.taux_impot}%)",
-                   "Profit net mensuel", f"Profit par associé ({st.session_state.nb_associes})"],
+    "Indicateur": [
+        "Revenu brut mensuel",
+        "Coût variable (location)",
+        "Coût fixe (charges)",
+        "Coût total mensuel",
+        "Bénéfice avant impôt",
+        f"Impôt ({st.session_state.taux_impot}%)",
+        "Profit net mensuel",
+        "Profit net avec amélioration (30% réduit)",
+        f"Profit par associé ({st.session_state.nb_associes})"
+    ],
     "Montant (DH)": [
         f"{indicateurs['revenu_brut']:.2f} DH",
         f"{indicateurs['cout_variable']:.2f} DH",
@@ -334,6 +342,7 @@ data_resume = {
         f"{indicateurs['benefice_brut']:.2f} DH",
         f"{indicateurs['impot']:.2f} DH",
         f"{indicateurs['profit_net']:.2f} DH",
+        f"{indicateurs['profit_net_avec_amélioration']:.2f} DH",
         f"{indicateurs['profit_par_associe']:.2f} DH"
     ]
 }
