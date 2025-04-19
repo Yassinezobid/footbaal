@@ -120,10 +120,10 @@ def calculer_indicateurs():
     total_investissement = investissement_specifique_terrain * st.session_state.nb_terrains + investissement_commun
     
     # Calcul du ROI et temps de retour
-    if total_investissement > 0 and profit_net_avec_amélioration > 0:
-        roi_mensuel = profit_net_avec_amélioration / total_investissement * 100
+    if total_investissement > 0 and profit_net_final > 0:
+        roi_mensuel = profit_net_final / total_investissement * 100
         roi_annuel = roi_mensuel * 12
-        temps_retour = total_investissement / profit_net_avec_amélioration
+        temps_retour = total_investissement / profit_net_final
     else:
         roi_mensuel = 0
         roi_annuel = 0
