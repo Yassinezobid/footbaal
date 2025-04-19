@@ -342,7 +342,7 @@ data_resume = {
         f"{indicateurs['benefice_brut']:.2f} DH",
         f"{indicateurs['impot']:.2f} DH",
         f"{indicateurs['profit_net']:.2f} DH",
-        f"{indicateurs['profit_net_avec_amélioration']:.2f} DH",
+        f"{indicateurs.get('profit_net_avec_amélioration', 'Non calculé'):.2f} DH",
         f"{indicateurs['profit_par_associe']:.2f} DH"
     ]
 }
