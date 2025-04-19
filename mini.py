@@ -329,6 +329,7 @@ data_resume = {
         "Bénéfice avant impôt",
         f"Impôt ({st.session_state.taux_impot}%)",
         "Profit net mensuel",
+        "Amélioration projet (30%)",
         f"Profit par associé ({st.session_state.nb_associes})"
     ],
     "Montant (DH)": [
@@ -339,7 +340,8 @@ data_resume = {
         f"{indicateurs['benefice_brut']:.2f} DH",
         f"{indicateurs['impot']:.2f} DH",
         f"{indicateurs['profit_net']:.2f} DH",
-        f"{indicateurs['profit_par_associe']:.2f} DH"
+        f"{indicateurs['charge_amelioration']:.2f} DH",
+        f"{(indicateurs['profit_net_apres_amelioration'] / st.session_state.nb_associes) if st.session_state.nb_associes > 0 else 0:.2f} DH"
     ]
 }
 
