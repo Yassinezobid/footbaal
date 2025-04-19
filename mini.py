@@ -96,7 +96,8 @@ def calculer_indicateurs():
     benefice_brut = revenu_brut - cout_total
     impot = benefice_brut * (st.session_state.taux_impot / 100) if benefice_brut > 0 else 0
     profit_net = benefice_brut - impot
-    profit_par_associe = profit_net / st.session_state.nb_associes if st.session_state.nb_associes > 0 else 0
+    profit_net_avec_amélioration = profit_net * 0.7
+    profit_par_associe = profit_net_avec_amélioration / st.session_state.nb_associes if st.session_state.nb_associes > 0 else 0
     
     # Calcul des investissements
     investissement_specifique_terrain = (
@@ -118,10 +119,10 @@ def calculer_indicateurs():
     total_investissement = investissement_specifique_terrain * st.session_state.nb_terrains + investissement_commun
     
     # Calcul du ROI et temps de retour
-    if total_investissement > 0 and profit_net > 0:
-        roi_mensuel = profit_net / total_investissement * 100
+    if total_investissement > 0 and profit_net_avec_amélioration > 0:
+        roi_mensuel = profit_net_avec_amélioration / total_investissement * 100
         roi_annuel = roi_mensuel * 12
-        temps_retour = total_investissement / profit_net
+        temps_retour = total_investissement / profit_net_avec_amélioration
     else:
         roi_mensuel = 0
         roi_annuel = 0
@@ -246,7 +247,7 @@ with st.form(key="location_form"):
 
 # Affichage du tableau de la location
 location_data = {
-    "Indicateur": ["Prix de location (DH/heure)", "Coût de location (DH/heure)", "Marge unitaire (DH/heure)", 
+    "Indicateur": ["Prix de location (DH/heure)", "Coût de location (DH/heure)", "Marge unitaire (DH/heure)",
                   "Locations par jour", "Revenu mensuel (DH)", "Coût mensuel (DH)", "Marge mensuelle (DH)"],
     "Valeur": [
         f"{st.session_state.prix_location:.2f} DH",
@@ -339,6 +340,22 @@ data_resume = {
 
 df_resume = pd.DataFrame(data_resume)
 st.dataframe(df_resume, use_container_width=True)
+
+# Formulaire pour ajuster les charges d'investissement
+with st.form(key="investissement_form"):
+    st.markdown('<p class="sub-header">🏗️ Ajuster les charges d\'investissement initial</p>', unsafe_allow_html=True)
+    for key in st.session_state.charges_investissement:
+        st.session_state.charges_investissement[key] = st.number_input(
+            f"{key} (DH)",
+            min_value=0.0,
+            value=float(st.session_state.charges_investissement[key]),
+            step=1000.0,
+            format="%.1f"
+        )
+    inv_submitted = st.form_submit_button("Mettre à jour les charges d'investissement")
+    if inv_submitted:
+        st.success("Charges d'investissement mises à jour!")
+        indicateurs = calculer_indicateurs()
 
 # 5. Charges d'investissement
 st.markdown('<p class="sub-header">🏗️ Charges d\'investissement initial</p>', unsafe_allow_html=True)
