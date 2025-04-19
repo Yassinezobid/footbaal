@@ -80,7 +80,6 @@ if 'prix_location' not in st.session_state:
         "Divers": 5000.0,
         "Création d'association": 5000.0
     }
-    indicateurs = calculer_indicateurs()
 
 # Fonction pour calculer les indicateurs financiers
 def calculer_indicateurs():
@@ -146,8 +145,6 @@ def calculer_indicateurs():
         'roi_annuel': roi_annuel,
         'temps_retour': temps_retour
     }
-
-# Calculer les indicateurs financiers
 indicateurs = calculer_indicateurs()
 
 # Affichage du résumé financier
