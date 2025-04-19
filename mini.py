@@ -49,7 +49,6 @@ st.markdown("### Simulez la rentabilité de vos terrains de mini football")
 
 # Initialisation des variables de session
 if 'prix_location' not in st.session_state:
-indicateurs = calculer_indicateurs()
     # Initialisation des paramètres
     st.session_state.prix_location = 200.0
     st.session_state.cout_location = 50.0
@@ -81,6 +80,7 @@ indicateurs = calculer_indicateurs()
         "Divers": 5000.0,
         "Création d'association": 5000.0
     }
+    indicateurs = calculer_indicateurs()
 
 # Fonction pour calculer les indicateurs financiers
 def calculer_indicateurs():
